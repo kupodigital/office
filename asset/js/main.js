@@ -1,17 +1,35 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, nativeImage } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
 let mainWindow;
 
+
+
 const folderPath = path.join(__dirname + "../../../", '_operations', 'original');
+const iconPath = path.join(__dirname + "../../../", 'asset', 'img');
+
+
+
 
 function createWindow() {
-    mainWindow = new BrowserWindow({
 
-        transparent: true,
+    //const appIcon = new Tray(iconPath);
+
+    mainWindow = new BrowserWindow({
+        autoHideMenuBar: true,
+        icon: nativeImage.createFromPath(path.join(iconPath, 'logo.png')),
+        backgroundColor: '#2e2c29',
+        center: true,
+        transparent: false,
         width: 1080,
         height: 750,
+        frame: true,
+        thickFrame: false,
+        darkTheme: true,
+        hasShadow: false,
+        navigateOnDragDrop: true,
+        enablePreferredSizeMode: true,
         webPreferences: {
             nodeIntegration: true,
             enableRemoteModule: true,
@@ -20,6 +38,11 @@ function createWindow() {
     });
 
     mainWindow.webContents.openDevTools();
+
+    //mainWindow.setIcon(path.join(iconPath, 'logo.png'));
+    mainWindow.setOverlayIcon(nativeImage.createFromPath(path.join(iconPath, 'logo-office.ico')), 'Kupo Office');
+
+    //mainWindow.webContents.capturePage();
 
     mainWindow.loadFile(__dirname + '../..' + '/index.html');
 
@@ -44,12 +67,16 @@ function createWindow() {
                     fs.copyFileSync(filePath, destinationPath);
                 });
                 event.sender.send('selected-files', result.filePaths);
+
             }
         }).catch(err => {
             console.error('Error opening file dialog:', err);
         });
     });
 
+    ipcMain.on('file-list', (event, fileList) => {
+        event.sender.send('list-files');
+    });
 
     ipcMain.on('list-files', async (event) => {
         try {
