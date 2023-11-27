@@ -4,6 +4,8 @@ const fs = require('fs');
 
 let mainWindow;
 
+const folderPath = path.join(__dirname + "../../../", '_operations', 'original');
+
 function createWindow() {
     mainWindow = new BrowserWindow({
 
@@ -25,27 +27,22 @@ function createWindow() {
         mainWindow = null;
     });
 
-
     ipcMain.on('open-file-dialog-for-file', function (event) {
         dialog.showOpenDialog(mainWindow, {
             filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'tiff', 'png', 'gif'] }],
             properties: ['openFile', 'multiSelections']
         }).then(result => {
             if (!result.canceled && result.filePaths.length > 0) {
-                const destinationFolder = path.join(__dirname + '../../../', '_operations', 'original');
 
-                // Certifique-se de que a pasta de destino exista
-                if (!fs.existsSync(destinationFolder)) {
-                    fs.mkdirSync(destinationFolder, { recursive: true });
+                if (!fs.existsSync(folderPath)) {
+                    fs.mkdirSync(folderPath, { recursive: true });
                 }
 
-                // Copie cada arquivo para a pasta de destino
                 result.filePaths.forEach(filePath => {
                     const fileName = path.basename(filePath);
-                    const destinationPath = path.join(destinationFolder, fileName);
+                    const destinationPath = path.join(folderPath, fileName);
                     fs.copyFileSync(filePath, destinationPath);
                 });
-
                 event.sender.send('selected-files', result.filePaths);
             }
         }).catch(err => {
@@ -55,13 +52,8 @@ function createWindow() {
 
 
     ipcMain.on('list-files', async (event) => {
-        const folderPath = path.join(__dirname + "../../../", '_operations', 'original');
-
-        console.log('Listing files in folder:', folderPath);
-
         try {
             const fileList = await listFilesInFolder(folderPath);
-            console.log('File list:', fileList);
             event.sender.send('file-list', fileList);
         } catch (error) {
             console.error('Error listing files:', error);
@@ -69,6 +61,13 @@ function createWindow() {
         }
     });
 
+    ipcMain.on('delete-file', async (event, fileName) => {
+        const filePath = folderPath + '/' + fileName;
+        if (fs.existsSync(filePath)) {
+            fs.promises.rm(filePath);
+        }
+        event.sender.send('update-file-list');
+    });
 
     function listFilesInFolder(folderPath) {
         return new Promise((resolve, reject) => {
@@ -81,7 +80,10 @@ function createWindow() {
             });
         });
     }
+
 }
+
+
 
 app.on('ready', createWindow);
 

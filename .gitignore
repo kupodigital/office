@@ -4,3 +4,4 @@ project-watch.sh
 node_modules/
 package-lock.json
 yarn.lock
+_operations/*/*

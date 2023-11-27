@@ -72,7 +72,7 @@
                         <form id="uploadForm">
                             <div class="border border-dashed border-gray-500 relative">
                                 <button id="upload" name="files"
-                                    class="cursor-pointer relative block w-full h-full p-10 z-50 text-white">
+                                    class="cursor-pointer relative block w-full h-full p-4 z-50 text-white">
                                     Select Files
                                 </button>
 
@@ -83,14 +83,16 @@
                 <div id="last-users">
                     <h1 class="font-bold py-4 uppercase">IMAGES TO CONVERT</h1>
                     <div class="overflow-x-auto">
-                        <table id="fileTable" class="w-full whitespace-nowrap">
-                            <thead class="bg-black/60">
-                                <th class="text-left py-3 px-2 rounded-l-lg">File Name</th>
-                                <th class="text-left py-3 px-2">Size</th>
-                                <th class="text-left py-3 px-2">Format</th>
-                                <th class="text-left py-3 px-2 rounded-r-lg">Actions</th>
+                        <table id="fileTable" class="w-full whitespace-nowrap cursor-default select-none">
+                            <thead class="bg-black/60 text-left text-sm font-thin">
+                                <th class="rounded-tl-lg rounded-bl-none w-28"></th>
+                                <th class="py-1 w-96">File Name</th>
+                                <th class="py-1 ">Size</th>
+                                <th class="py-1 ">Dimension</th>
+                                <th class="py-1 ">Format</th>
+                                <th class="py-1 rounded-tr-lg rounded-br-none">Actions</th>
                             </thead>
-                            <tbody id="fileList"></tbody>
+                            <tbody id="fileList" class="select-none mt-3 pt-4"></tbody>
                             <!--tr class="border-b border-gray-700">
                                 <td class="py-3 px-2 font-bold">
                                     <div class="inline-flex space-x-3 items-center">
