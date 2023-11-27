@@ -1,0 +1,6 @@
+project-ini.sh
+project-server.sh
+project-watch.sh
+node_modules/
+package-lock.json
+yarn.lock
