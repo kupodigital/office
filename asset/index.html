@@ -53,18 +53,22 @@
                             <div>
                                 <p
                                     class="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-lime-400">
-                                    Resize</p>
+                                    Workspace
+                                </p>
                                 <p class="text-slate-400 text-sm hidden md:block">Image Convert</p>
                             </div>
                             <div
-                                class="absolute -top-3 -right-3 md:top-0 md:right-0 px-2 py-1.5 rounded-full bg-lime-400 text-xs font-mono font-bold text-black">
+                                class="absolute -top-3 -right-3 md:top-0 md:right-0 px-2 py-1.5 rounded-full bg-lime-500 text-xs font-mono font-bold text-black">
                                 23</div>
                         </div>
                     </a>
 
-
+                    <p
+                        class="select-none text-xs text-center bg-zinc-950 text-zinc-700 absolute bottom-0 w-full left-0 py-1">
+                        <a href="https://kupo.digital" class="external-link" target="_blank">Kupo Digital</a>
+                    </p>
                 </div>
-                <p class="text-sm text-center text-gray-600">V 1.0.0 | &copy; 2023 Weslley Alves</p>
+
             </div>
 
             <div id="content" class="bg-zinc-950 col-span-10 p-6 h-full ">
@@ -73,9 +77,15 @@
                     <div id="stats" class="grid gird-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2">
                         <form id="uploadForm">
                             <div class="border border-dashed border-gray-500 relative">
-                                <button id="upload" name="files"
+                                <button id="upload" name="files" title="Select Files"
                                     class="cursor-pointer relative block w-full h-full p-4 z-50 text-white">
-                                    Select Files
+
+                                    <svg class="w-6 h-6 inline text-lime-500" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="0.7"
+                                            d="M7 19H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2v4M6 1v4a1 1 0 0 1-1 1H1m11 8h4m-2 2v-4m5 2a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" />
+                                    </svg>
                                 </button>
 
                         </form>

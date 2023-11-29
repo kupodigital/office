@@ -7,23 +7,32 @@
   "version": "1.0.0",
   "author": "Weslley Alves",
   "scripts": {
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "dependencies": {
-    "@electron-forge/cli": "7.1.0",
-    "@electron-forge/maker-deb": "7.1.0",
-    "@electron-forge/maker-rpm": "7.1.0",
-    "@electron-forge/maker-squirrel": "7.1.0",
-    "@electron-forge/maker-zip": "7.1.0",
-    "@electron-forge/plugin-auto-unpack-natives": "7.1.0",
-    "electron-squirrel-startup": "1.0.0",
+    "@electron-forge/maker-deb": "^7.1.0",
+    "@electron-forge/maker-squirrel": "^7.1.0",
+    "@electron-forge/maker-zip": "^7.1.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.1.0",
+    "electron-squirrel-startup": "^1.0.0",
     "file-type": "^18.7.0",
+    "jimp": "^0.22.10",
     "mime": "^3.0.0",
     "sharp": "^0.32.6",
     "stream-mime-type": "^2.0.0"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.1.0",
+    "@electron-forge/maker-rpm": "^7.1.0",
     "electron": "^27.1.2"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "build": {
+    "productName": "Kupo Office",
+    "linux": {
+      "executableName": "kupo.office"
+    }
+  }
 }
